@@ -25,20 +25,10 @@ iframe {
   height: 100%;
   width: 100%;
 }
-textarea {
-  appearance: none;
-  background-color: #333;
-  color: white;
-  border: none;
-  width: 100%;
-  font-family: monospace;
-  height: 100%;
-  font-size: 1rem;
-  padding: 1rem;
-  resize: none;
-}
+
 .editor {
   position: relative;
+  overflow: hidden;
 }
 .editor::after {
   position: absolute;
@@ -57,9 +47,6 @@ textarea {
 }
 .editor-js::after {
   background-image: url("./assets/js.svg");
-}
-textarea:focus {
-  outline: none;
 }
 
 .grid {
