@@ -1,6 +1,10 @@
 html {
   box-sizing: border-box;
 }
+:root {
+  --bgDark: #2c2c32;
+}
+
 *,
 *:before,
 *:after {
@@ -10,13 +14,15 @@ html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: grid;
+  grid-template-columns: auto 1fr;
 }
 body {
   width: 100%;
   margin: 0;
   height: 100vh;
+  background-color: var(--bgDark);
+  color: white;
 }
 
 iframe {
@@ -25,7 +31,11 @@ iframe {
   height: 100%;
   width: 100%;
 }
-
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
 .editor {
   position: relative;
   overflow: hidden;
@@ -53,17 +63,42 @@ iframe {
   display: grid;
   grid-template-columns: 1fr 10px 1fr;
   grid-template-rows: 1fr 10px 1fr;
-  height: 100%;
+  height: 100vh;
 }
 
 .vertical-gutter {
   cursor: col-resize;
   grid-area: 1 / 2 / 4 / 2;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bgDark);
 }
 
 .horizontal-gutter {
   cursor: row-resize;
   grid-area: 2 / 1 / 3 / 4;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--bgDark);
+}
+
+/* aside styles ******/
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.toolbar-item {
+  padding: 1rem;
+  width: 4rem;
+  margin: 0;
+}
+.is-active {
+  position: relative;
+  opacity: 1;
+}
+.is-active::after {
+  content: "";
+  position: absolute;
+  width: 0.2rem;
+  height: 100%;
+  background-color: #c5c5c5;
+  bottom: 0;
+  left: 0;
 }
