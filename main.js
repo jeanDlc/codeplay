@@ -1,7 +1,7 @@
 import "./style.css";
 import Split from "split-grid"; //to split the panel
 import { encode, decode } from "js-base64"; //now can encode emojis
-
+import { createEditor } from "./src/editor";
 const $ = (selector) => document.querySelector(selector);
 Split({
   columnGutters: [
@@ -17,39 +17,41 @@ Split({
     },
   ],
 });
+const { pathname } = window.location;
+const [htmlRaw, cssRaw, jsRaw] = pathname.slice(1).split("%7C");
+const html = decode(htmlRaw || "");
+const css = decode(cssRaw || "");
+const js = decode(jsRaw || "");
 
 const $js = $("#js");
 const $html = $("#html");
 const $css = $("#css");
-function init() {
-  const { pathname } = window.location;
-  const [html, css, js] = pathname.slice(1).split("%7C");
-  $html.value = decode(html);
-  $css.value = decode(css);
-  $js.value = decode(js);
-  update();
-}
-$js.addEventListener("input", (e) => {
-  update();
+const htmlEditor = createEditor({
+  domEl: $html,
+  language: "html",
+  value: html,
 });
-$html.addEventListener("input", (e) => {
-  update();
+const cssEditor = createEditor({ domEl: $css, language: "css", value: css });
+const jsEditor = createEditor({
+  domEl: $js,
+  language: "javascript",
+  value: js,
 });
-
-$css.addEventListener("input", (e) => {
-  update();
-});
-const update = () => {
-  const html = $html.value;
-  const css = $css.value;
-  const js = $js.value;
+update();
+htmlEditor.onDidChangeModelContent(update);
+cssEditor.onDidChangeModelContent(update);
+jsEditor.onDidChangeModelContent(update);
+function update() {
+  const html = htmlEditor.getValue();
+  const css = cssEditor.getValue();
+  const js = jsEditor.getValue();
   const hashedCode = `${encode(html)}|${encode(css)}|${encode(js)}`;
 
   window.history.replaceState(null, null, `/${hashedCode}`);
   const htmlForPreview = createHtml({ html, js, css });
   $("iframe").setAttribute("srcdoc", htmlForPreview);
-};
-const createHtml = ({ html, js, css }) => {
+}
+function createHtml({ html, js, css }) {
   return `
   <!DOCTYPE html>
 <html lang="en">
@@ -65,5 +67,4 @@ const createHtml = ({ html, js, css }) => {
 </html>
 
   `;
-};
-init();
+}
