@@ -1,8 +1,11 @@
 html {
   box-sizing: border-box;
 }
+
 :root {
   --bgDark: #2c2c32;
+  --borderInputColor: #25252b;
+  --bgColorInput: rgb(54, 54, 63);
 }
 
 *,
@@ -24,7 +27,14 @@ body {
   background-color: var(--bgDark);
   color: white;
 }
-
+input,
+select {
+  border: none;
+}
+input:focus,
+select:focus {
+  outline: none;
+}
 iframe {
   background-color: white;
   border: none;
@@ -79,10 +89,14 @@ button {
 }
 
 /* aside styles ******/
+aside {
+  display: flex;
+}
 .toolbar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 .toolbar-item {
   padding: 1rem;
@@ -101,4 +115,44 @@ button {
   background-color: #c5c5c5;
   bottom: 0;
   left: 0;
+}
+.settings-container {
+  min-width: 20rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+.settings-list {
+  padding: 0;
+  margin: 0;
+}
+li.setting-item {
+  list-style: none;
+  padding: 1.4rem 1rem;
+}
+li.setting-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.setting-name,
+.setting-description {
+  margin: 0;
+}
+.setting-name {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.setting-description {
+  margin-bottom: 1rem;
+}
+
+.setting-item input,
+.setting-item select {
+  width: 100%;
+  padding: 0.4rem 0.5rem;
+  background-color: var(--bgColorInput);
+  color: rgb(225, 228, 232);
+  border: 1px solid var(--borderInputColor);
+}
+.setting-item select {
+  cursor: pointer;
 }
