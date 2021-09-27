@@ -2,6 +2,7 @@ import "./style.css";
 import Split from "split-grid"; //to split the panel
 import { encode, decode } from "js-base64"; //now can encode emojis
 import { createEditor } from "./src/editor";
+import "./src/aside";
 const $ = (selector) => document.querySelector(selector);
 Split({
   columnGutters: [
