@@ -1,6 +1,6 @@
 export function $(selector = "", context = document) {
-  return document.querySelector(selector);
+  return context.querySelector(selector);
 }
 export function $$(selector = "", context = document) {
-  return document.querySelectorAll(selector);
+  return context.querySelectorAll(selector);
 }

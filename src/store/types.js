@@ -1,0 +1,4 @@
+/**types for dispatch actions */
+//settings of the editor
+export const CHANGE_EDITOR_FONT_SIZE = "CHANGE_EDITOR_FONT_SIZE";
+export const CHANGE_EDITOR_THEME = "CHANGE_EDITOR_THEME";

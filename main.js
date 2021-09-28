@@ -3,6 +3,9 @@ import Split from "split-grid"; //to split the panel
 import { encode, decode } from "js-base64"; //now can encode emojis
 import { createEditor } from "./src/editor";
 import "./src/aside";
+import "./src/settings";
+import { subscribe, getState } from "./src/store";
+
 const $ = (selector) => document.querySelector(selector);
 Split({
   columnGutters: [
@@ -39,6 +42,16 @@ const jsEditor = createEditor({
   value: js,
 });
 update();
+
+//listening changes of the editor settings
+subscribe(() => {
+  const newSettings = getState();
+  const editors = [htmlEditor, cssEditor, jsEditor];
+  editors.forEach((editor) => {
+    editor.updateOptions(newSettings);
+  });
+});
+
 htmlEditor.onDidChangeModelContent(update);
 cssEditor.onDidChangeModelContent(update);
 jsEditor.onDidChangeModelContent(update);

@@ -13,6 +13,7 @@
     "emmet-monaco-es": "^4.7.2",
     "js-base64": "^3.7.2",
     "monaco-editor": "^0.28.0",
+    "redux": "^4.1.1",
     "split-grid": "^1.0.11"
   }
 }
