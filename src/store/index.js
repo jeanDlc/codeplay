@@ -1,10 +1,14 @@
 import { createStore } from "redux";
-import { CHANGE_EDITOR_FONT_SIZE, CHANGE_EDITOR_THEME } from "./types";
+import {
+  CHANGE_EDITOR_FONT_SIZE,
+  CHANGE_EDITOR_THEME,
+  CHANGE_EDITOR_LINE_NUMBERS,
+} from "./types";
 const COMMON_EDITOR_OPTIONS = {
   fontSize: 17,
   wordWrap: true,
-  theme: "vs-dark",
-
+  theme: "vs-dark", // vs || hc-black
+  lineNumbers: "off", // on || relative || interval
   automaticLayout: true,
   fixedOverflowWidgets: true,
   scrollBeyondLastLine: false,
@@ -24,6 +28,11 @@ function settings(state = COMMON_EDITOR_OPTIONS, action) {
       return {
         ...state,
         theme: action.payload,
+      };
+    case CHANGE_EDITOR_LINE_NUMBERS:
+      return {
+        ...state,
+        lineNumbers: action.payload,
       };
     default:
       return state;
