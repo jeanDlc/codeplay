@@ -1,4 +1,5 @@
 import { $ } from "./utils/dom";
+import { isPositive } from "./utils";
 import { dispatch, getState } from "./store";
 import {
   changeEditorFontSize,
@@ -20,7 +21,9 @@ function initSidebarSettings() {
 //listen change of setting editor
 inputFontSize.addEventListener("change", (e) => {
   const newFontSize = Number(e.target.value);
-  dispatch(changeEditorFontSize(newFontSize));
+  if (isPositive(newFontSize)) {
+    dispatch(changeEditorFontSize(newFontSize));
+  }
 });
 selectElemenTheme.addEventListener("change", (e) => {
   const newTheme = e.target.value;
