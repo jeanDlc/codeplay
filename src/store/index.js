@@ -4,7 +4,7 @@ import {
   CHANGE_EDITOR_THEME,
   CHANGE_EDITOR_LINE_NUMBERS,
 } from "./types";
-const COMMON_EDITOR_OPTIONS = {
+const DEFAULT_STATE = {
   fontSize: 17,
   wordWrap: true,
   theme: "vs-dark", // vs || hc-black
@@ -17,7 +17,17 @@ const COMMON_EDITOR_OPTIONS = {
     top: 16,
   },
 };
-function settings(state = COMMON_EDITOR_OPTIONS, action) {
+
+//to remember the state, save it in LocalStorage
+const lsKey = "editor-settings";
+const setStateInLocalStorage = (state = {}) => {
+  localStorage.setItem(lsKey, JSON.stringify(state));
+};
+const getStateOfLocalStorage = () => JSON.parse(localStorage.getItem(lsKey));
+
+// in the render, get the state of LocalStorage (if there is any stored state)
+const INITIAL_STATE = getStateOfLocalStorage() || DEFAULT_STATE;
+function settings(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CHANGE_EDITOR_FONT_SIZE:
       return {
@@ -38,6 +48,13 @@ function settings(state = COMMON_EDITOR_OPTIONS, action) {
       return state;
   }
 }
+
+export let store = createStore(settings);
+store.subscribe(() => {
+  //any change of the state, store the that state in LocalStorage
+  const state = store.getState();
+  setStateInLocalStorage(state);
+});
 export const subscribe = (callback) => {
   store.subscribe(callback);
 };
@@ -47,4 +64,3 @@ export function getState() {
 export function dispatch(someActionCreator = {}) {
   store.dispatch(someActionCreator);
 }
-export let store = createStore(settings);
