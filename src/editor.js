@@ -20,12 +20,21 @@ self.MonacoEnvironment = {
     return new editorWorker();
   },
 };
-
+const COMMON_OPTIONS_EDITOR = {
+  automaticLayout: true,
+  fixedOverflowWidgets: true,
+  scrollBeyondLastLine: false,
+  roundedSelection: false,
+  padding: {
+    top: 16,
+  },
+};
 const settings = getState();
 export const createEditor = ({ domEl, value, language }) => {
   return monaco.editor.create(domEl, {
     value,
     language,
+    ...COMMON_OPTIONS_EDITOR,
     ...settings,
   });
 };

@@ -9,13 +9,6 @@ const DEFAULT_STATE = {
   wordWrap: true,
   theme: "vs-dark", // vs || hc-black
   lineNumbers: "off", // on || relative || interval
-  automaticLayout: true,
-  fixedOverflowWidgets: true,
-  scrollBeyondLastLine: false,
-  roundedSelection: false,
-  padding: {
-    top: 16,
-  },
 };
 
 //to remember the state, save it in LocalStorage
