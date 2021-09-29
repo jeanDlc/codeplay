@@ -5,18 +5,21 @@ import {
   changeEditorFontSize,
   changeEditorTheme,
   changeEditorLineNumbers,
+  changeEditorWordWrap,
 } from "./store/actionCreators";
 const inputFontSize = $("#editor-font-size");
 const selectElemenTheme = $("#editor-select-theme");
 const selectElementLineNumbers = $("#editor-select-line-numbers");
+const selectElementWordWrap = $("#editor-select-word-wrap");
 
 //init the default options of the settings menu bar
 document.addEventListener("DOMContentLoaded", initSidebarSettings);
 function initSidebarSettings() {
-  const { fontSize, theme, lineNumbers } = getState();
+  const { fontSize, theme, lineNumbers, wordWrap } = getState();
   inputFontSize.value = fontSize;
   selectElemenTheme.value = theme;
   selectElementLineNumbers.value = lineNumbers;
+  selectElementWordWrap.value = wordWrap;
 }
 //listen change of setting editor
 inputFontSize.addEventListener("change", (e) => {
@@ -32,4 +35,8 @@ selectElemenTheme.addEventListener("change", (e) => {
 selectElementLineNumbers.addEventListener("change", (e) => {
   const numberLinesConfig = e.target.value;
   dispatch(changeEditorLineNumbers(numberLinesConfig));
+});
+selectElementWordWrap.addEventListener("change", (e) => {
+  const wordWrap = e.target.value;
+  dispatch(changeEditorWordWrap(wordWrap));
 });

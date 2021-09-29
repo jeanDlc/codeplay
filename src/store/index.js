@@ -3,10 +3,11 @@ import {
   CHANGE_EDITOR_FONT_SIZE,
   CHANGE_EDITOR_THEME,
   CHANGE_EDITOR_LINE_NUMBERS,
+  CHANGE_EDITOR_WORD_WRAP,
 } from "./types";
 const DEFAULT_STATE = {
   fontSize: 17,
-  wordWrap: true,
+  wordWrap: "on", // off || bounded || wordWrapColumn
   theme: "vs-dark", // vs || hc-black
   lineNumbers: "off", // on || relative || interval
 };
@@ -37,6 +38,12 @@ function settings(state = INITIAL_STATE, action) {
         ...state,
         lineNumbers: action.payload,
       };
+    case CHANGE_EDITOR_WORD_WRAP:
+      return {
+        ...state,
+        wordWrap: action.payload,
+      };
+
     default:
       return state;
   }
