@@ -102,6 +102,10 @@ aside {
   padding: 1rem;
   width: 4rem;
   margin: 0;
+  opacity: 0.6;
+}
+.toolbar-item:hover {
+  opacity: 1;
 }
 .is-active {
   position: relative;
